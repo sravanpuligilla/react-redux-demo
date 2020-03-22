@@ -5,28 +5,31 @@ import { actions as serviceDetialsActions } from "../reducers/serviceDetails";
 export class ControlService extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      serviceData: []
+    };
   }
 
   componentDidMount = async () => {
     await this.props.getControlService();
-
-	console.log(this.props.serviceDetailsData);
+    this.setState(
+      {
+        serviceData: this.props.serviceDetailsData.serviceDetailsData
+      });	  
   }
 
   render() {
-	
-	return (
-	<ul>
-        {/* {this.props.data.map((el,i) => (
-          <li key={i}>{el.id}</li>
-        ))} */}
-       {/* {this.props.serviceDetailsData.serviceDetailsData} */}
-       
-      </ul>
-    );
-	
-    
-  }// return for render
+    return (
+      <React.Fragment>
+      <ul>
+        {this.state.serviceData.map((el,i) => (
+            <li key={i}>{el.id}</li>
+          ))}        
+        </ul>
+      </React.Fragment>
+    )
+  }
+
 }
 
 function mapStateToProps(state) {
